@@ -58,13 +58,40 @@ function buscarPorId<T extends {id: number}>(arreglo: T[], id: number, callback:
 }
 
 
-buscarPorId(Deportistas, 2, (deportista) => {
+buscarPorId(Deportistas, 3, (deportista) => {
     if (deportista) {
         console.log(`ID: ${deportista.id}`);
         console.log(`Nombre: ${deportista.Nomre}`);
         console.log(`Identificación: ${deportista.Identificacion}`);
         console.log(`Equipo que representa: ${deportista.Equipo_que_representa}`);
+        console.log('-------------------------');
+        console.log('-------------------------');
     } else {
         console.log('No se encontró un deportista con ese ID.');
+        console.log('-------------------------');
+        console.log('-------------------------');
     }
 });
+// Usando Promises
+fetch('https://pokeapi.co/api/v2/pokemon/pikachu')
+    .then(response => response.json())
+    .then(data => {
+        console.log(`Nombre: ${data.name}`);
+        console.log(`Altura: ${data.height}`);
+        console.log(`Peso: ${data.weight}`);
+    })
+    .catch(error => console.error('Error:', error));
+
+// Usando Async/await
+async function obtenerDatosPokemon() {
+    try {
+        const response = await fetch('https://pokeapi.co/api/v2/pokemon/pikachu');
+        const data = await response.json();
+        console.log(`Nombre: ${data.name}`);
+        console.log(`Altura: ${data.height}`);
+        console.log(`Peso: ${data.weight}`);
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+obtenerDatosPokemon()
