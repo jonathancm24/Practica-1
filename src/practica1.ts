@@ -58,7 +58,7 @@ function buscarPorId<T extends {id: number}>(arreglo: T[], id: number, callback:
 }
 
 
-buscarPorId(Deportistas, 3, (deportista) => {
+buscarPorId(Deportistas, 2, (deportista) => {
     if (deportista) {
         console.log(`ID: ${deportista.id}`);
         console.log(`Nombre: ${deportista.Nomre}`);
