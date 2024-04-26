@@ -51,3 +51,20 @@ Deportistas.forEach(deportista => {
     console.log(`Equipo que representa: ${deportista.Equipo_que_representa}`);
     console.log('-------------------------');
 });
+
+function buscarPorId<T extends {id: number}>(arreglo: T[], id: number, callback: (objeto: T | undefined) => void) {
+    const objetoEncontrado = arreglo.find(objeto => objeto.id === id);
+    callback(objetoEncontrado);
+}
+
+
+buscarPorId(Deportistas, 2, (deportista) => {
+    if (deportista) {
+        console.log(`ID: ${deportista.id}`);
+        console.log(`Nombre: ${deportista.Nomre}`);
+        console.log(`Identificación: ${deportista.Identificacion}`);
+        console.log(`Equipo que representa: ${deportista.Equipo_que_representa}`);
+    } else {
+        console.log('No se encontró un deportista con ese ID.');
+    }
+});
