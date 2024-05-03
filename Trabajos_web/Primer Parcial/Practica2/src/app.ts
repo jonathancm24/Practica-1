@@ -89,7 +89,31 @@ llenar()
   }
   
   buscar(5) // Reemplaza 1 con el ID de la transacción que deseas buscar
-    .catch(e => {
+    
+  
+  
+  async function consultar(): Promise<void> {
+    const separaciones = await prisma.separacion.findMany({
+      include: {
+        id_Cancha: true,
+        id_Deportista: true
+      }
+    })
+  
+    for (const separacion of separaciones) {
+      console.log('Transacción:', separacion)
+      console.log('Cancha:', separacion.id_Cancha)
+      console.log('Deportista:', separacion.id_Deportista)
+      console.log('-------------------------')
+    }
+  }
+  
+  consultar()
+  
+  
+  
+  
+  .catch(e => {
       throw e
     })
     .finally(async () => {
