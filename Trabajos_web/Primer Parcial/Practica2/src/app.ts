@@ -39,7 +39,7 @@ const prisma = new PrismaClient()
     })*/
 
 
-async function llenar(): Promise<void> {
+/*async function llenar(): Promise<void> {
   for (let i = 0; i < 10; i++) {
     await prisma.separacion.create({
       data: {
@@ -68,4 +68,30 @@ llenar()
   })
   .finally(async () => {
     await prisma.$disconnect()
-  })
+  })*/
+
+  async function buscar(id: number): Promise<void> {
+    const separacion = await prisma.separacion.findUnique({
+      where: {
+        id: id
+      },
+      include: {
+        id_Cancha: true,
+        id_Deportista: true
+      }
+    })
+  
+    if (separacion) {
+      console.log(separacion)
+    } else {
+      console.log(`No se encontró ninguna transacción con el ID ${id}.`)
+    }
+  }
+  
+  buscar(5) // Reemplaza 1 con el ID de la transacción que deseas buscar
+    .catch(e => {
+      throw e
+    })
+    .finally(async () => {
+      await prisma.$disconnect()
+    })
