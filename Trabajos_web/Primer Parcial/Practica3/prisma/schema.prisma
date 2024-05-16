@@ -11,6 +11,7 @@ model cancha {
   id          Int          @id @default(autoincrement())
   Descripcion String?
   separacion  separacion[]
+   Estado             String?  @default("Activa")
 }
 
 model Deportista {
@@ -19,7 +20,9 @@ model Deportista {
   identificacion        String?
   Equipo_que_representa String?
   separacion            separacion[]
+   Estado             String?  @default("Activa")
 }
+
 
 model separacion {
   id                  Int        @id @default(autoincrement())
@@ -30,4 +33,5 @@ model separacion {
   Hora_hasta          String?
   cancha              cancha     @relation(fields: [canchaId], references: [id])
   Deportista          Deportista @relation(fields: [DeportistaId], references: [id])
+  Estado             String?  @default("Activa")
 }
