@@ -7,39 +7,60 @@ app.use(express.json());
 
 // Rutas para Cancha
 app.get('/canchas', async (req, res) => {
-    const canchas = await prisma.cancha.findMany();
+    const canchas = await prisma.cancha.findMany({
+        where: {
+            Estado: 'Activa', // Filtra por registros activos
+        },
+    });
     res.json(canchas);
 });
 
 app.post('/canchas', async (req, res) => {
     const newCancha = await prisma.cancha.create({
-        data: req.body,
+        data: {
+            ...req.body,
+            Estado: 'Activa', // Establece el estado al crear una nueva cancha
+        },
     });
     res.json(newCancha);
 });
 
 // Rutas para Deportista
 app.get('/deportistas', async (req, res) => {
-    const deportistas = await prisma.deportista.findMany();
+    const deportistas = await prisma.deportista.findMany({
+        where: {
+            Estado: 'Activa', // Filtra por registros activos
+        },
+    });
     res.json(deportistas);
 });
 
 app.post('/deportistas', async (req, res) => {
     const newDeportista = await prisma.deportista.create({
-        data: req.body,
+        data: {
+            ...req.body,
+            Estado: 'Activa', // Establece el estado al crear una nueva cancha
+        },
     });
     res.json(newDeportista);
 });
 
 // Rutas para Separacion
 app.get('/separaciones', async (req, res) => {
-    const separaciones = await prisma.separacion.findMany();
+    const separaciones = await prisma.separacion.findMany({
+        where: {
+            Estado: 'Activa', // Filtra por registros activos
+        },
+    });
     res.json(separaciones);
 });
 
 app.post('/separaciones', async (req, res) => {
     const newSeparacion = await prisma.separacion.create({
-        data: req.body,
+        data: {
+            ...req.body,
+            Estado: 'Activa', // Establece el estado al crear una nueva cancha
+        },
     });
     res.json(newSeparacion);
 });
