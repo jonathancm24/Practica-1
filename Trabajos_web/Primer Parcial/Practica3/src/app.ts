@@ -24,6 +24,27 @@ app.post('/canchas', async (req, res) => {
     });
     res.json(newCancha);
 });
+app.put('/canchas/:id', async (req, res) => {
+    const { id } = req.params;
+    const updatedCancha = await prisma.cancha.update({
+        where: { id: parseInt(id) },
+        data: {
+            Descripcion: req.body.Descripcion, // Actualiza la descripción según los datos enviados
+            // Otros campos que desees actualizar
+        },
+    });
+    res.json(updatedCancha);
+});
+app.delete('/canchas/:id', async (req, res) => {
+    const { id } = req.params;
+    await prisma.cancha.update({
+        where: { id: parseInt(id) },
+        data: {
+            Estado: 'Inactivo', // Establece el estado a "Inactivo"
+        },
+    });
+    res.status(204).send(); // Respuesta exitosa sin contenido
+});
 
 // Rutas para Deportista
 app.get('/deportistas', async (req, res) => {
@@ -45,6 +66,30 @@ app.post('/deportistas', async (req, res) => {
     res.json(newDeportista);
 });
 
+app.put('/deportistas/:id', async (req, res) => {
+    const { id } = req.params;
+    const updatedDeportista = await prisma.deportista.update({
+        where: { id: parseInt(id) },
+        data: {
+            Nombre: req.body.Descripcion, 
+            identificacion: req.body.identificacion,
+            Equipo_que_representa: req.body.Equipo_que_reprsenata,
+        },
+    });
+    res.json(updatedDeportista);
+});
+
+app.delete('/deportistas/:id', async (req, res) => {
+    const { id } = req.params;
+    await prisma.deportista.update({
+        where: { id: parseInt(id) },
+        data: {
+            Estado: 'Inactivo', // Establece el estado a "Inactivo"
+        },
+    });
+    res.status(204).send(); // Respuesta exitosa sin contenido
+});
+
 // Rutas para Separacion
 app.get('/separaciones', async (req, res) => {
     const separaciones = await prisma.separacion.findMany({
@@ -63,6 +108,32 @@ app.post('/separaciones', async (req, res) => {
         },
     });
     res.json(newSeparacion);
+});
+
+app.put('/separaciones/:id', async (req, res) => {
+    const { id } = req.params;
+    const updatedSeparacion = await prisma.separacion.update({
+        where: { id: parseInt(id) },
+        data: {
+            canchaId: req.body.canchaId,
+            DeportistaId: req.body.deportistaId,
+            Fecha_de_Separacion: req.body.Fecha, 
+            Hora_desde: req.body.Hora,
+            Hora_hasta: req.body.Hora,      
+        },
+    });
+    res.json(updatedSeparacion);
+});
+
+app.delete('/separaciones/:id', async (req, res) => {
+    const { id } = req.params;
+    await prisma.separacion.update({
+        where: { id: parseInt(id) },
+        data: {
+            Estado: 'Inactivo', // Establece el estado a "Inactivo"
+        },
+    });
+    res.status(204).send(); // Respuesta exitosa sin contenido
 });
 
 const PORT = process.env.PORT || 3000;
