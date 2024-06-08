@@ -2,6 +2,7 @@ import express from 'express';
 import canchasRoutes from './Routes/canchas.routes';
 import deportistasRoutes from './Routes/deportistas.routes';
 import separacionesRoutes from './Routes/separaciones.routes';
+import ConsumoRoutes from './Routes/Consumo.routes';
 import errorMiddleware from './Middlewares/errores';
 import { validateRequest } from './utils/validator';
 
@@ -12,6 +13,8 @@ app.use(express.json());
 app.use('/canchas', canchasRoutes);
 app.use('/deportistas', deportistasRoutes);
 app.use('/separaciones', separacionesRoutes);
+app.use('/Consumo', ConsumoRoutes);
+
 
 // Middleware de manejo de errores
 app.use(errorMiddleware);
