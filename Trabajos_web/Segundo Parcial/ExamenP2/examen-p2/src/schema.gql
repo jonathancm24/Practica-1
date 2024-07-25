@@ -1,0 +1,51 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type ObraDeArte {
+  id: Int!
+  codigo: String!
+  Nombre_artistico: String!
+  Artista: String!
+  Tipo: String!
+  Evaluado_en: Int!
+  Fecha_de_ultimo_retoque: DateTime!
+  Empresa: String!
+  eliminado_logicamente: Boolean!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Query {
+  obraDeArte(id: Int!): ObraDeArte!
+}
+
+type Mutation {
+  createObraDeArte(createObraDeArteInput: CreateObraDeArteInput!): ObraDeArte!
+  updateObraDeArte(id: Int!, updateObraDeArteInput: UpdateObraDeArteInput!): ObraDeArte!
+  deleteObraDeArte(id: Int!): ObraDeArte!
+  logicalDeleteObraDeArte(id: Int!): ObraDeArte!
+}
+
+input CreateObraDeArteInput {
+  codigo: String!
+  Nombre_artistico: String!
+  Artista: String!
+  Tipo: String!
+  Evaluado_en: Int!
+  Fecha_de_ultimo_retoque: DateTime!
+  Empresa: String!
+}
+
+input UpdateObraDeArteInput {
+  codigo: String
+  Nombre_artistico: String
+  Artista: String
+  Tipo: String
+  Evaluado_en: Int
+  Fecha_de_ultimo_retoque: DateTime
+  Empresa: String
+}
